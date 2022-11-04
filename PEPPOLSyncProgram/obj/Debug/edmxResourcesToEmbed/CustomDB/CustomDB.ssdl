@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PEPPOLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CustomerRegistration">
+    <Key>
+      <PropertyRef Name="UEN" />
+    </Key>
+    <Property Name="UEN" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="GSTRegistrationNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AddressLine1" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="AddressLine2" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="AuthorizedPersonnelName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AuthorizedPersonnelEmail" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="AuthorizedPersonnelContactNumber" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="SubmitToStarHub" Type="bit" Nullable="false" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="PEPPOLID" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PEPPOL.dbo.Errors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Errors">
+    <Key>
+      <PropertyRef Name="Idkey" />
+    </Key>
+    <Property Name="Idkey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ErrMsg" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="Idkey" />
+    </Key>
+    <Property Name="Idkey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="traceId" Type="varchar" MaxLength="200" />
+    <Property Name="timestamp" Type="varchar" MaxLength="200" />
+    <Property Name="eventType" Type="varchar" MaxLength="200" />
+    <Property Name="outcome" Type="varchar" MaxLength="200" />
+    <Property Name="primarysubjectid" Type="varchar" MaxLength="200" />
+    <Property Name="secondarysubjectid" Type="varchar" MaxLength="200" />
+    <Property Name="message" Type="varchar(max)" />
+    <Property Name="SubmitToSAP" Type="bit" />
+  </EntityType>
+  <EntityType Name="SyncErrLog">
+    <Key>
+      <PropertyRef Name="IdKey" />
+    </Key>
+    <Property Name="IdKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="errMsg" Type="text" />
+    <Property Name="InnerException" Type="text" />
+    <Property Name="FileName" Type="varchar" MaxLength="500" />
+    <Property Name="LineNumber" Type="varchar" MaxLength="20" />
+    <Property Name="CreatedOn" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="PEPPOLModelStoreContainer">
+    <EntitySet Name="CustomerRegistration" EntityType="Self.CustomerRegistration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SyncErrLog" EntityType="Self.SyncErrLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Errors" EntityType="Self.Errors" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Errors].[Idkey] AS [Idkey], 
+    [Errors].[ErrMsg] AS [ErrMsg]
+    FROM [dbo].[Errors] AS [Errors]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

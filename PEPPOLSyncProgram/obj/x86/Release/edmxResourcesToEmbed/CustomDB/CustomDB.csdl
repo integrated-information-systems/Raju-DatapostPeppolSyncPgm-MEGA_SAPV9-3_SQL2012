@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PEPPOLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PEPPOLEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Notifications" EntityType="PEPPOLModel.Notifications" />
+    <EntitySet Name="Errors" EntityType="PEPPOLModel.Errors" />
+    <EntitySet Name="SyncErrLog" EntityType="PEPPOLModel.SyncErrLog" />
+    <EntitySet Name="CustomerRegistration" EntityType="PEPPOLModel.CustomerRegistration" />
+  </EntityContainer>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="Idkey" />
+    </Key>
+    <Property Name="Idkey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="traceId" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="timestamp" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="eventType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="outcome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="primarysubjectid" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="secondarysubjectid" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SubmitToSAP" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Errors">
+    <Key>
+      <PropertyRef Name="Idkey" />
+    </Key>
+    <Property Name="Idkey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ErrMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SyncErrLog">
+    <Key>
+      <PropertyRef Name="IdKey" />
+    </Key>
+    <Property Name="IdKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="errMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="LineNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="CustomerRegistration">
+    <Key>
+      <PropertyRef Name="UEN" />
+    </Key>
+    <Property Name="UEN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="GSTRegistrationNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AddressLine2" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizedPersonnelName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizedPersonnelEmail" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizedPersonnelContactNumber" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="SubmitToStarHub" Type="Boolean" Nullable="false" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <Property Name="PEPPOLID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>
